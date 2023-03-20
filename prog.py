@@ -55,22 +55,23 @@ with fits.open("data.fits") as hdu_list:
 mean_data = np.mean(data, axis = 0)
 median_data = np.median(data, axis = 0)
 
-data_dict = {}
-data_dict["Mean"] = mean_data
-data_dict["Median"] = median_data
+results = {}
+results["Mean"] = mean_data
+results["Median"] = median_data
+
 count = 1
-for title in data_dict.keys():
+for title, result in results.items():
     plt.subplot(2, 2, count)
     plt.title(title+" slice")
     plt.xlabel("$x$")
     plt.ylabel("$I$")
-    plt.plot(*do_plot_data(1000,0,199,lambda x: I(x,100, data_dict[title])))
+    plt.plot(*do_plot_data(1000,0,199,lambda x: I(x,100, result)))
 
     plt.subplot(2, 2, count+2)
     plt.title(title+" growth curve")
     plt.xlabel("$r$")
     plt.ylabel("$I$")
-    plt.plot(*do_plot_data(100,0,99,lambda x: circle_I(x,100, 5, data_dict[title])))
+    plt.plot(*do_plot_data(100,0,99,lambda x: circle_I(x,100, 5, result)))
     count+=1
 
 plt.show()
