@@ -51,8 +51,9 @@ def circle_I(R, N_r, N_phi, data):
 
 with fits.open("data.fits") as hdu_list:
     data = [hdu.data for hdu in hdu_list[1:]]
-    mean_data = np.mean(data, axis = 0)
-    median_data = np.median(data, axis = 0)
+
+mean_data = np.mean(data, axis = 0)
+median_data = np.median(data, axis = 0)
 
 data_dict = {}
 data_dict["Mean"] = mean_data
